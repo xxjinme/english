@@ -16,6 +16,14 @@
                     <ul class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $course->id]) ?>
                 </div>
+                <!--Shopping Cart-->
+                <div class="single-but item_add">
+                    <?php echo $this->Form->create('Cart', ['id'=>'add-form', 'url' => ['controller'=>'carts', 'action' => 'add']]); ?>
+                    <?php echo $this->Form->hidden('khoaHoc_id',array('value'=>$course->id))?>
+                    <?= $this->Form->button(__('Add to cart')) ?>
+                    <?= $this->Form->end() ?>  
+                </div> 
+                <!--End Shopping Cart-->
             <?php endforeach; ?>
         </div>
         <div class="paginator">
@@ -29,3 +37,14 @@
             <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
         </div>
     </div>
+<script>
+$(document).ready(function(){
+    $('#add-form').submit(function(e){
+        e.preventDefault();
+        var tis = $(this);
+        $.post(tis.attr('action'),tis.serialize(),function(data){
+            $('#cart-counter').text(data);
+        });
+    });
+});
+</script>

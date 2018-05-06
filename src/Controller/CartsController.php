@@ -33,7 +33,7 @@ class CartsController extends AppController
         $khoaHocs = array();
         if (null!=$carts) {
             //$first = true;
-            foreach ($carts as $productId => $count) {
+            foreach ($carts as $khoaHocId => $count) {
                 //$product = $this->Banhs->get($productId, , ['contain' => [] ]);
                 //$product = $this->Banhs->read(null,$productId);
                 //if(!$first){

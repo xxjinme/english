@@ -57,7 +57,7 @@ class CartsTable extends Table
             $allKhoaHocs[$khoaHocId] = 1;
             //$this->saveProduct($allProducts);
         }
-        $this->saveProduct($allKhoaHocs);
+        $this->saveKhoaHoc($allKhoaHocs);
         //$this->Session->destroy();
     }
 
