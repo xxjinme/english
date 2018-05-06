@@ -2,8 +2,7 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
-use Cake\Auth\DefaultPasswordHasher;
-
+use Cake\Auth\DefaultPasswordHasher; // hash password
 /**
  * User Entity
  *
@@ -38,24 +37,20 @@ class User extends Entity
         'user_gender' => true,
         'hoa_dons' => true
     ];
+      /**
+     * Fields that are excluded from JSON versions of the entity.
+     *
+     * @var array
+     */
     protected $_hidden = [
-        'password'
+        'user_password'
     ];
-    protected function _setPassword($value)
+    protected function _setUserPassword($value)
     {
         if (strlen($value)) {
             $hasher = new DefaultPasswordHasher();
 
-            return $hasher->hash($value);
-        }
-    }
-    protected function _setCheckcode($value)
-    {
-        if (strlen($value)) {
-            $hasher = new DefaultPasswordHasher();
-            
             return $hasher->hash($value);
         }
     }
 }
-

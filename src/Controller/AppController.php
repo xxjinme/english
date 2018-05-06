@@ -58,8 +58,8 @@ class AppController extends Controller
             'authenticate' => [
                 'Form' => [
                     'fields' => [
-                        'username' => 'email',
-                        'password' => 'password'
+                        'username' => 'id',
+                        'password' => 'user_password'
                     ]
                 ]
             ],
@@ -72,6 +72,7 @@ class AppController extends Controller
                 'action' => 'display',
                 'home'
             ],
+            'storage' => 'Session',
              // If unauthorized, return them to page they were just on
             'unauthorizedRedirect' => $this->referer()
         ]);
@@ -88,6 +89,7 @@ class AppController extends Controller
         }
         $this->set('Auth', $this->Auth);
     }
+
     public function beforeFilter(Event $event)
     {
         //$this->Auth->allow(['index','view', 'display']);

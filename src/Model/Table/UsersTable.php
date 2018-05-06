@@ -72,9 +72,10 @@ class UsersTable extends Table
 
         $validator
             ->scalar('user_role')
-            ->maxLength('user_role', 20)
+            ->maxLength('user_role', 255)
             ->requirePresence('user_role', 'create')
             ->notEmpty('user_role');
+
 
         $validator
             ->scalar('user_gender')
@@ -82,14 +83,7 @@ class UsersTable extends Table
             ->requirePresence('user_gender', 'create')
             ->notEmpty('user_gender');
 
-        return $validator
-            ->notEmpty('username', 'A username is required')
-            ->notEmpty('password', 'A password is required')
-            ->notEmpty('role', 'A role is required')
-            ->add('role', 'inList', [
-                'rule' => ['inList', ['admin', 'author']],
-                'message' => 'Please enter a valid role'
-        ]);
+        return $validator;
     }
 
     /**
@@ -101,7 +95,7 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['email'],'Sorry, This email has been used. Choose another email.'));
+        $rules->add($rules->isUnique(['email']));
 
         return $rules;
     }

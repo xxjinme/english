@@ -1,9 +1,16 @@
-<fieldset>	
-	<legend><?= __('LOGIN') ?></legend>
-	<?= $this->Form->create() ?>
-	<?= $this->Form->control('email') ?>
-	<?= $this->Form->control('user_password') ?>
-	<?= $this->Form->button('Login') ?>
-	<?= $this->Html->link(__('Dont have an account? Sign up'), ['action' => 'signup']) ?>
-	<?= $this->Form->end() ?>
-</fieldset>
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
+<div class="users form">
+<?= $this->Flash->render('auth') ?>
+    <?= $this->Form->create() ?>
+    <fieldset>
+        <legend><?= __('Please enter your username and password') ?></legend>
+        <?= $this->Form->control('id') ?>
+        <?= $this->Form->control('user_password') ?>
+    </fieldset>
+    <?= $this->Form->button(__('Login')); ?>
+    <?= $this->Form->end() ?>
+</div>

@@ -2,13 +2,14 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Auth\DefaultPasswordHasher; // hash password
 use Cake\Event\Event;
 use Cake\Mailer\Email;
-use Cake\Auth\DefaultPasswordHasher; // hash password
-
+use Cake\Network\Session;
 /**
  * Users Controller
  *
+ * @property \App\Model\Table\UsersTable $Users
  *
  * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
@@ -24,7 +25,7 @@ class UsersController extends AppController
     public function isAuthorized($user)
     {
         // All registered users can add articles
-        if ($this->request->getParam('action') === 'signup') {
+        if (in_array($this->request->getParam('action'), ['signup','login'])) {
             return true;
         }
 
@@ -36,7 +37,6 @@ class UsersController extends AppController
         }
         return parent::isAuthorized($user);
     }
-
     /**
      * Index method
      *
@@ -59,7 +59,7 @@ class UsersController extends AppController
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => []
+            'contain' => ['HoaDons']
         ]);
 
         $this->set('user', $user);
@@ -75,34 +75,6 @@ class UsersController extends AppController
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
-            /* Xử lý ảnh */
-            // lấy tên file upload
-            date_default_timezone_set('Asia/Ho_Chi_Minh');
-            $time = date("Ymd_His");
-            $image=$_FILES['user_avatar']['name'];
-            // Lấy tên gốc của file
-            $filename = stripslashes($_FILES['user_avatar']['name']);
-            $filetype = $_FILES['user_avatar']['type'];
-            $file_tmp = $_FILES['user_avatar']['tmp_name'];
-            //Lấy phần mở rộng của file
-            $explore = explode ('.',$filename); //chia chuoi bang '.'
-            $ext = end($explore);
-            //kiểm tra file phải hình ảnh ko
-            $chophep = array('jpeg','png','bpm','jpg','JPEG','JPG');
-            if (in_array($ext,$chophep) === false){
-                    $this->Flash->success(__('File upload không hợp lệ'));
-                }
-            /*----------UPLOADING----------*/
-            // đặt tên mới cho file hình up lên
-            $image_name = $time.'.'.$ext;
-            // gán thêm cho file này đường dẫn
-            $newname=$_SERVER["DOCUMENT_ROOT"]. '/english/webroot/img/user_img/' .$image_name;
-            //nếu ko có lỗi xảy ra->> tiếp tục upload
-                if (move_uploaded_file($file_tmp,$newname)){
-                      $this->Flash->success(__('Saved image'));
-                      $user->user_avatar=$image_name;
-                    }
-            /* Tiếp tục lưu data */
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
@@ -192,8 +164,12 @@ class UsersController extends AppController
             $this->Flash->error(__('The user could not active. Please, try again.'));
          }
     }
-    public function login()
+
+   public function login()
     {
+        if(!isset($_SESSION)) {
+           session_start();
+        }
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
@@ -210,5 +186,4 @@ class UsersController extends AppController
         $this->Flash->success('You are now logged out.');
         return $this->redirect($this->Auth->logout());
     }
-
 }
