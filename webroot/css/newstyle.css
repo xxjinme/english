@@ -1,0 +1,130 @@
+header{
+	background-image: url("../img/study2.jpg");	
+	height: 300px;
+	width: 100%;
+}
+.menu-logo{
+	background-image: url("../img/study5.jpg");	
+	height: 700px;
+	display: grid;
+	grid-template-columns: 20% 80%;
+	font-family: 'Advent Pro';
+	text-align: right;
+	margin: 20px 5% ;
+
+}
+.logo{
+	width: 70%;
+	margin: 15px 30px;
+	font-size: 30px;
+}
+.menu{
+
+}
+.menu ul{
+    list-style-type: none;
+    margin: 0 100px;
+    padding: 0;
+    overflow: hidden;
+    color: black;
+    font-size: 20px;
+}
+.menu li {
+    float: right;
+}
+
+.menu li a {
+    display: block;
+    text-align: center;
+    padding: 8px 15px;
+    text-decoration: none;
+}
+
+.menu li a:hover {
+    background-color: white;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border-bottom: 1px solid #E78775;
+}
+button {
+  display: inline-block;
+  border: 1px solid #0F647F;
+  background-color: white;
+  color: #0F647F;
+  text-align: center;
+  font-size: 15px;
+  padding: 6px;
+  width: 100px;
+  margin: 10px 0;
+  cursor: pointer;
+  font-family: 'Advent Pro', cursive;
+}
+button:hover{
+  background-color: #0F647F;
+  color: #FECEAB;
+  border: 1px solid #FECEAB;
+}
+.allbox{
+	display: grid;
+	grid-template-columns: repeat(2,1fr);
+}
+
+.box{
+	text-align: center;
+	padding: 0px;
+	color:white;
+	font-family: 'Nova Flat';
+ 	position: relative;
+  	width: 100%;
+  	height: 100%;
+}
+.box ul{
+	margin: 0;
+	padding: 5px;
+	color: #5E616A; //xam
+}
+.side-nav{
+	 	list-style: none;
+	 	color:white;
+		font-family: 'Nova Flat';
+		font-size: 20px;
+		padding: 0;
+		text-align: center;
+		margin: 0;
+		width: 100%;
+}
+#actions-sidebar{
+	background-color: #e2ecf2;
+	padding-top: 20px;
+	width: 20%;
+}
+.courses{
+	padding-top: 0px;
+	width: 80%;
+}
+.users{
+	padding-top: 0px;
+	width: 80%;
+}
+.khoahocs{
+	width: 100%
+}
+.wrapper{
+	display: grid;
+	grid-template-columns: 40% 60%;
+}
+
+h3{
+  	font-family: 'Advent Pro', cursive;
+	color: #E78775;
+	text-align: center;
+}
+span{
+	color:#5E616A ;
+}
