@@ -59,7 +59,7 @@ class AppController extends Controller
                 'Form' => [
                     'fields' => [
                         'username' => 'email',
-                        'password' => 'user_password'
+                        'password' => 'password'
                     ]
                 ]
             ],
@@ -98,13 +98,6 @@ class AppController extends Controller
     }    
     public function isAuthorized($user)
     {
-      
-
-      if ( $user['active'] === '1') {
-            return true;
-        }
-
-        // Default deny
-        return false;
+      return true;
     }
 }
