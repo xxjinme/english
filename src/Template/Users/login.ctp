@@ -8,7 +8,7 @@
     <?= $this->Form->create() ?>
     <fieldset>
         <legend><?= __('Please enter your username and password') ?></legend>
-        <?= $this->Form->control('id') ?>
+        <?= $this->Form->control('email') ?>
         <?= $this->Form->control('user_password') ?>
     </fieldset>
     <?= $this->Form->button(__('Login')); ?>

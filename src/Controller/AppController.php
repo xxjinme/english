@@ -58,7 +58,7 @@ class AppController extends Controller
             'authenticate' => [
                 'Form' => [
                     'fields' => [
-                        'username' => 'id',
+                        'username' => 'email',
                         'password' => 'user_password'
                     ]
                 ]
@@ -66,6 +66,10 @@ class AppController extends Controller
             'loginAction' => [
                 'controller' => 'Users',
                 'action' => 'login'
+            ],
+            'loginRedirect' => [
+                'controller' => 'KhoaHocs',
+                'action' => 'index'
             ],
             'logoutRedirect' => [
                 'controller' => 'Pages',
@@ -94,12 +98,9 @@ class AppController extends Controller
     {
         //$this->Auth->allow(['index','view', 'display']);
 
-        $this->Auth->allow(['signup','login', 'logout','display']);
+        $this->Auth->allow(['signup','login', 'logout','index']);
         $this->loadModel('Carts');         
         $this->set('count',$this->Carts->getCount());
     }    
-    public function isAuthorized($user)
-    {
-      return true;
-    }
+    
 }

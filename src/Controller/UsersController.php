@@ -167,8 +167,9 @@ class UsersController extends AppController
 
    public function login()
     {
-        if(!isset($_SESSION)) {
-           session_start();
+        
+        if(isset($_SESSION)) {
+           session_destroy();
         }
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
@@ -183,6 +184,9 @@ class UsersController extends AppController
     
     public function logout()
     {
+        if(isset($_SESSION)) {
+           session_destroy();
+        }
         $this->Flash->success('You are now logged out.');
         return $this->redirect($this->Auth->logout());
     }
